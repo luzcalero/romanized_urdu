@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bol Urdu | Learn Romanized Urdu through Music</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo-group">
+        <div class="logo-badge">بول</div>
+        <div>
+          <h1 class="brand-title">Bol Urdu</h1>
+          <p class="brand-subtitle">Learn Romanized Urdu with Coke Studio & Songs</p>
+        </div>
+      </div>
+
+      <!-- Mode Switcher -->
+      <nav class="mode-switcher" aria-label="Learning Mode">
+        <button class="mode-btn active" data-mode="translate" id="mode-translate">
+          <span>📖</span> Read & Translate
+        </button>
+        <button class="mode-btn" data-mode="fill" id="mode-fill">
+          <span>✍️</span> Fill in the Blank
+        </button>
+        <button class="mode-btn" data-mode="karaoke" id="mode-karaoke">
+          <span>🎵</span> Synced Lyrics
+        </button>
+      </nav>
+
+      <!-- Actions -->
+      <div class="header-actions">
+        <select id="speed-select" class="speed-select" title="Playback Speed">
+          <option value="0.75">0.75x Speed</option>
+          <option value="0.9">0.9x Speed</option>
+          <option value="1" selected>1.0x Normal</option>
+          <option value="1.25">1.25x Fast</option>
+        </select>
+        <a href="https://github.com/luzcalero/romanized_urdu" target="_blank" rel="noopener noreferrer" class="github-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="app-main">
+    <!-- Left Column: Video & Active Learning Card -->
+    <div class="player-column">
+      <!-- YouTube Video Container -->
+      <div class="video-container">
+        <div id="yt-player"></div>
+      </div>
+
+      <!-- Video Control Toolbar -->
+      <div class="player-controls-card">
+        <div class="left-controls">
+          <button id="btn-prev-line" class="control-btn" title="Previous Line (Left Arrow)">⏮ Prev</button>
+          <button id="btn-play-pause" class="control-btn primary" title="Play / Pause (Space)">▶ Play</button>
+          <button id="btn-next-line" class="control-btn" title="Next Line (Right Arrow)">Next ⏭</button>
+          <button id="btn-replay-line" class="control-btn" title="Replay Line (R)">↺ Replay</button>
+        </div>
+
+        <div class="right-controls">
+          <label class="toggle-label" title="Pause automatically when a line finishes to allow translation reading">
+            <span class="toggle-switch">
+              <input type="checkbox" id="toggle-autopause">
+              <span class="toggle-slider"></span>
+            </span>
+            <span>Auto-pause line</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Active Spotlight Lyric Card -->
+      <section class="active-card glow-active" id="active-card">
+        <div class="active-card-header">
+          <span class="active-card-tag" id="active-mode-tag">📖 READ & TRANSLATE</span>
+          <span class="active-card-singer" id="active-singer">Ali Sethi</span>
+        </div>
+
+        <!-- Romanized Text Container -->
+        <div class="active-roman-box" id="active-roman-text">
+          Select a line to begin
+        </div>
+
+        <!-- Optional Nastaliq Script Display -->
+        <div class="urdu-script-sub" id="active-urdu-script"></div>
+
+        <!-- Dynamic Interaction Area (Translation Reveal OR Fill-in-the-Blank input) -->
+        <div id="interactive-area">
+          <!-- Populated by JS according to selected mode -->
+        </div>
+
+        <!-- Vocabulary Breakdown Chips -->
+        <div class="vocab-section" id="vocab-section" style="display: none;">
+          <div class="vocab-heading">Key Vocabulary & Meaning</div>
+          <div class="vocab-chips" id="vocab-chips"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Right Column: Interactive Lyrics Timeline -->
+    <section class="lyrics-column">
+      <div class="lyrics-header">
+        <div class="lyrics-title-group">
+          <h3 id="song-title">Pasoori</h3>
+          <p id="song-meta">Ali Sethi x Shae Gill • Coke Studio 14</p>
+        </div>
+        <div class="lyrics-options">
+          <span class="score-badge" id="score-badge" style="display: none;">Score: 0</span>
+        </div>
+      </div>
+
+      <!-- Scrollable Lyric Items -->
+      <div class="lyrics-list" id="lyrics-list" role="list">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Load Data & Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
