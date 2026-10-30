@@ -37,7 +37,9 @@
 
 ## 🚀 Live Demo & Deployment
 
-This project is built with vanilla HTML5, CSS3, and modern JavaScript with **zero build dependencies**. It is ready to be hosted 100% free on **GitHub Pages**.
+**Live Web App:** [https://luzcalero.github.io/romanized_urdu/](https://luzcalero.github.io/romanized_urdu/)
+
+This project is built with vanilla HTML5, CSS3, and modern JavaScript with **zero build dependencies**. It is hosted 100% free on **GitHub Pages**.
 
 ### Enable GitHub Pages
 1. Go to your repository **Settings** > **Pages**.
